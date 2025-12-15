@@ -1,0 +1,49 @@
+package vn.nhom13.laptopshop.domain;
+
+import java.io.Serializable;
+import java.util.List;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "factories")
+public class Factory implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    // 1 factory có nhiều product
+    @OneToMany(mappedBy = "factory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
+
+    // getter & setter
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+}
