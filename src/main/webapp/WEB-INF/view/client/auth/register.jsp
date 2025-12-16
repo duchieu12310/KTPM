@@ -9,7 +9,7 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <title>Đăng ký tài khoản - Laptopshop</title>
+                <title>Đăng ký tài khoản - kinhmta</title>
 
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -49,6 +49,9 @@
                                                     </c:set>
                                                     <c:set var="errorBirthYear">
                                                         <form:errors path="birthYear" cssClass="invalid-feedback" />
+                                                    </c:set>
+                                                    <c:set var="errorAddress">
+                                                        <form:errors path="address" cssClass="invalid-feedback" />
                                                     </c:set>
                                                     <c:set var="errorPassword">
                                                         <form:errors path="confirmPassword"
@@ -96,6 +99,86 @@
                                                         <label>Số điện thoại</label>
                                                         ${errorPhone}
                                                     </div>
+
+                                                    <!-- ===== ĐỊA CHỈ ===== -->
+                                                    <div class="form-floating mb-3">
+                                                        <form:select path="address"
+                                                            class="form-select ${not empty errorAddress ? 'is-invalid' : ''}">
+                                                            <form:option value="">-- Chọn tỉnh / thành phố --
+                                                            </form:option>
+
+                                                            <form:option value="An Giang">An Giang</form:option>
+                                                            <form:option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu
+                                                            </form:option>
+                                                            <form:option value="Bắc Giang">Bắc Giang</form:option>
+                                                            <form:option value="Bắc Kạn">Bắc Kạn</form:option>
+                                                            <form:option value="Bạc Liêu">Bạc Liêu</form:option>
+                                                            <form:option value="Bắc Ninh">Bắc Ninh</form:option>
+                                                            <form:option value="Bến Tre">Bến Tre</form:option>
+                                                            <form:option value="Bình Định">Bình Định</form:option>
+                                                            <form:option value="Bình Dương">Bình Dương</form:option>
+                                                            <form:option value="Bình Phước">Bình Phước</form:option>
+                                                            <form:option value="Bình Thuận">Bình Thuận</form:option>
+                                                            <form:option value="Cà Mau">Cà Mau</form:option>
+                                                            <form:option value="Cần Thơ">Cần Thơ</form:option>
+                                                            <form:option value="Cao Bằng">Cao Bằng</form:option>
+                                                            <form:option value="Đà Nẵng">Đà Nẵng</form:option>
+                                                            <form:option value="Đắk Lắk">Đắk Lắk</form:option>
+                                                            <form:option value="Đắk Nông">Đắk Nông</form:option>
+                                                            <form:option value="Điện Biên">Điện Biên</form:option>
+                                                            <form:option value="Đồng Nai">Đồng Nai</form:option>
+                                                            <form:option value="Đồng Tháp">Đồng Tháp</form:option>
+                                                            <form:option value="Gia Lai">Gia Lai</form:option>
+                                                            <form:option value="Hà Giang">Hà Giang</form:option>
+                                                            <form:option value="Hà Nam">Hà Nam</form:option>
+                                                            <form:option value="Hà Nội">Hà Nội</form:option>
+                                                            <form:option value="Hà Tĩnh">Hà Tĩnh</form:option>
+                                                            <form:option value="Hải Dương">Hải Dương</form:option>
+                                                            <form:option value="Hải Phòng">Hải Phòng</form:option>
+                                                            <form:option value="Hậu Giang">Hậu Giang</form:option>
+                                                            <form:option value="Hòa Bình">Hòa Bình</form:option>
+                                                            <form:option value="Hưng Yên">Hưng Yên</form:option>
+                                                            <form:option value="Khánh Hòa">Khánh Hòa</form:option>
+                                                            <form:option value="Kiên Giang">Kiên Giang</form:option>
+                                                            <form:option value="Kon Tum">Kon Tum</form:option>
+                                                            <form:option value="Lai Châu">Lai Châu</form:option>
+                                                            <form:option value="Lâm Đồng">Lâm Đồng</form:option>
+                                                            <form:option value="Lạng Sơn">Lạng Sơn</form:option>
+                                                            <form:option value="Lào Cai">Lào Cai</form:option>
+                                                            <form:option value="Long An">Long An</form:option>
+                                                            <form:option value="Nam Định">Nam Định</form:option>
+                                                            <form:option value="Nghệ An">Nghệ An</form:option>
+                                                            <form:option value="Ninh Bình">Ninh Bình</form:option>
+                                                            <form:option value="Ninh Thuận">Ninh Thuận</form:option>
+                                                            <form:option value="Phú Thọ">Phú Thọ</form:option>
+                                                            <form:option value="Phú Yên">Phú Yên</form:option>
+                                                            <form:option value="Quảng Bình">Quảng Bình</form:option>
+                                                            <form:option value="Quảng Nam">Quảng Nam</form:option>
+                                                            <form:option value="Quảng Ngãi">Quảng Ngãi</form:option>
+                                                            <form:option value="Quảng Ninh">Quảng Ninh</form:option>
+                                                            <form:option value="Quảng Trị">Quảng Trị</form:option>
+                                                            <form:option value="Sóc Trăng">Sóc Trăng</form:option>
+                                                            <form:option value="Sơn La">Sơn La</form:option>
+                                                            <form:option value="Tây Ninh">Tây Ninh</form:option>
+                                                            <form:option value="Thái Bình">Thái Bình</form:option>
+                                                            <form:option value="Thái Nguyên">Thái Nguyên</form:option>
+                                                            <form:option value="Thanh Hóa">Thanh Hóa</form:option>
+                                                            <form:option value="Thừa Thiên Huế">Thừa Thiên Huế
+                                                            </form:option>
+                                                            <form:option value="Tiền Giang">Tiền Giang</form:option>
+                                                            <form:option value="TP Hồ Chí Minh">TP Hồ Chí Minh
+                                                            </form:option>
+                                                            <form:option value="Trà Vinh">Trà Vinh</form:option>
+                                                            <form:option value="Tuyên Quang">Tuyên Quang</form:option>
+                                                            <form:option value="Vĩnh Long">Vĩnh Long</form:option>
+                                                            <form:option value="Vĩnh Phúc">Vĩnh Phúc</form:option>
+                                                            <form:option value="Yên Bái">Yên Bái</form:option>
+                                                        </form:select>
+
+                                                        <label>Địa chỉ</label>
+                                                        ${errorAddress}
+                                                    </div>
+
 
                                                     <!-- ===== GIỚI TÍNH ===== -->
                                                     <div class="form-floating mb-3">

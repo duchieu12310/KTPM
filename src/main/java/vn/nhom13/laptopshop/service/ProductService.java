@@ -71,6 +71,22 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
+    public void handleDeleteAllCart(User user, HttpSession session) {
+        Cart cart = this.fetchByUser(user);
+        if (cart == null)
+            return;
+
+        // Xóa toàn bộ cart detail
+        this.cartDetailRepository.deleteAll(cart.getCartDetails());
+
+        // Clear trong entity
+        cart.getCartDetails().clear();
+        this.cartRepository.save(cart);
+
+        // Update session (icon cart)
+        session.setAttribute("sum", 0);
+    }
+
     // ================= FILTER / SPEC =================
 
     public Page<Product> fetchProductsWithSpec(Pageable page, ProductCriteriaDTO dto) {

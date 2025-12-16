@@ -102,7 +102,7 @@ public class UserService {
         user.setPhone(registerDTO.getPhone());
         user.setGender(registerDTO.getGender());
         user.setBirthYear(registerDTO.getBirthYear());
-
+        user.setAddress(registerDTO.getAddress());
         // Role mặc định USER
         Role role = this.roleRepository.findByName("USER");
         user.setRole(role);

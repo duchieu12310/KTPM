@@ -8,7 +8,7 @@
 
                 <head>
                     <meta charset="utf-8">
-                    <title> Sản Phẩm - Laptopshop</title>
+                    <title> Sản Phẩm - kinhmta</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
@@ -211,7 +211,7 @@
                                                                         value="${product.price}" />
                                                                     đ
                                                                 </p>
-                                                                <form action="/add-product-to-cart/${product.id}"
+                                                                <form action="/add-product-to-cart2/${product.id}"
                                                                     method="post">
                                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                                         value="${_csrf.token}" />

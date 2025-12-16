@@ -196,4 +196,31 @@ public class ItemController {
         return "client/product/show";
     }
 
+    @PostMapping("/delete-all")
+    public String deleteAllCart(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/cart";
+        }
+
+        long userId = (long) session.getAttribute("id");
+        User currentUser = new User();
+        currentUser.setId(userId);
+
+        this.productService.handleDeleteAllCart(currentUser, session);
+
+        return "redirect:/cart";
+    }
+
+    @PostMapping("/add-product-to-cart2/{id}")
+    public String addProductToCart2(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        long productId = id;
+        String email = (String) session.getAttribute("email");
+
+        this.productService.handleAddProductToCart(email, productId, session, 1);
+
+        return "redirect:/products";
+    }
 }

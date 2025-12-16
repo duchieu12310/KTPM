@@ -31,6 +31,10 @@ public class RegisterDTO {
     @Min(value = 1900, message = "Năm sinh không hợp lệ")
     private Integer birthYear;
 
+    @NotBlank(message = "Địa chỉ không được để trống")
+    @Size(min = 5, message = "Địa chỉ phải có ít nhất 5 ký tự")
+    private String address;
+
     @NotBlank(message = "Password không được để trống")
     @Size(min = 3, message = "Password phải có tối thiểu 3 ký tự")
     private String password;
@@ -87,6 +91,14 @@ public class RegisterDTO {
 
     public void setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPassword() {
