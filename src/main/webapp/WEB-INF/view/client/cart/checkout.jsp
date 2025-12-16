@@ -8,7 +8,7 @@
 
                 <head>
                     <meta charset="utf-8">
-                    <title>Thanh toán - Laptopshop</title>
+                    <title>Thanh toán - ktpm</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
                     <link rel="preconnect" href="https://fonts.googleapis.com">

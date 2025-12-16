@@ -10,9 +10,9 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>vn.nhom13</groupId>
-	<artifactId>laptopshop</artifactId>
+	<artifactId>ktpm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>laptopshop</name>
+	<name>ktpm</name>
 	<description>Demo project for Spring Boot</description>
  	<!-- jar không hỗ trợ jsp :v -->
 	<packaging>war</packaging>
