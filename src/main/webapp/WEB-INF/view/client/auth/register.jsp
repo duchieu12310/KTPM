@@ -62,20 +62,21 @@
                                                             cssClass="invalid-feedback" />
                                                     </c:set>
 
-
+                                                    <div class="col-md-12">
+                                                        <div class="form-floating mb-3 mb-md-0">
+                                                            <form:input path="firstName" type="text"
+                                                                placeholder="Nhập tên"
+                                                                class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}" />
+                                                            <label>Họ và Tên</label>
+                                                            ${errorFirstName}
+                                                        </div>
+                                                    </div>
                                                     <!-- ===== HỌ TÊN ===== -->
                                                     <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input path="firstName" type="text"
-                                                                    placeholder="Nhập tên"
-                                                                    class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}" />
-                                                                <label>Tên</label>
-                                                                ${errorFirstName}
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
+
+                                                        <!-- Ẩn phần Họ -->
+                                                        <div class="col-md-6 d-none">
                                                             <div class="form-floating">
                                                                 <form:input path="lastName" type="text"
                                                                     placeholder="Nhập họ" class="form-control" />
@@ -83,6 +84,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
 
                                                     <!-- ===== EMAIL ===== -->
                                                     <div class="form-floating mb-3">

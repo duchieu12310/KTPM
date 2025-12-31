@@ -11,7 +11,8 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="ktpm Admin" />
                 <meta name="author" content="Nhom 13" />
-                <title>Manage Factory</title>
+                <title>Quản lý danh mục</title>
+
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -25,18 +26,32 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Factory</h1>
+                                <h1 class="mt-4">Quản lý danh mục</h1>
+
+                                <c:if test="${not empty errorMessage}">
+                                    <div class="alert alert-danger">
+                                        ${errorMessage}
+                                    </div>
+                                </c:if>
+
+                                <c:if test="${not empty successMessage}">
+                                    <div class="alert alert-success">
+                                        ${successMessage}
+                                    </div>
+                                </c:if>
 
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Factory</li>
+                                    <li class="breadcrumb-item">
+                                        <a href="/admin">Bảng điều khiển</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Danh mục</li>
                                 </ol>
 
                                 <div class="mt-4">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3>Table factory</h3>
+                                        <h3>Bảng danh mục</h3>
                                         <a href="/admin/factory/create" class="btn btn-primary">
-                                            Create factory
+                                            Thêm danh mục
                                         </a>
                                     </div>
 
@@ -44,8 +59,8 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Factory Name</th>
-                                                <th>Action</th>
+                                                <th>Tên danh mục</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
 
@@ -54,7 +69,7 @@
                                             <c:if test="${empty factories}">
                                                 <tr>
                                                     <td colspan="3" class="text-center text-muted">
-                                                        Chưa có factory nào
+                                                        Chưa có danh mục nào
                                                     </td>
                                                 </tr>
                                             </c:if>
@@ -66,13 +81,20 @@
                                                     <td>${factory.name}</td>
                                                     <td>
                                                         <a href="/admin/factory/${factory.id}"
-                                                            class="btn btn-success btn-sm">View</a>
+                                                            class="btn btn-success btn-sm">
+                                                            Xem
+                                                        </a>
 
                                                         <a href="/admin/factory/update/${factory.id}"
-                                                            class="btn btn-warning btn-sm mx-1">Update</a>
+                                                            class="btn btn-warning btn-sm mx-1">
+                                                            Cập nhật
+                                                        </a>
 
                                                         <a href="/admin/factory/delete/${factory.id}"
-                                                            class="btn btn-danger btn-sm">Delete</a>
+                                                            class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?');">
+                                                            Xóa
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

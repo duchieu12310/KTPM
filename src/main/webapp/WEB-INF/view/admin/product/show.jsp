@@ -9,7 +9,8 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Manage Products</title>
+                <title>Quản lý sản phẩm</title>
+
                 <link href="/css/styles.css" rel="stylesheet">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -27,16 +28,20 @@
                     <div id="layoutSidenav_content">
                         <main class="container-fluid px-4 mt-4">
 
-                            <h1 class="mb-4">Manage Products</h1>
+                            <h1 class="mb-4">Quản lý sản phẩm</h1>
 
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item">
+                                    <a href="/admin">Bảng điều khiển</a>
+                                </li>
+                                <li class="breadcrumb-item active">Sản phẩm</li>
                             </ol>
 
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3>Product List</h3>
-                                <a href="/admin/product/create" class="btn btn-primary">Create a Product</a>
+                                <h3>Danh sách sản phẩm</h3>
+                                <a href="/admin/product/create" class="btn btn-primary">
+                                    Thêm sản phẩm
+                                </a>
                             </div>
 
                             <div class="table-responsive">
@@ -44,10 +49,10 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Factory</th>
-                                            <th>Action</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Danh mục</th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,18 +68,26 @@
                                                         <c:when test="${not empty product.factory}">
                                                             ${product.factory.name}
                                                         </c:when>
-                                                        <c:otherwise>N/A</c:otherwise>
+                                                        <c:otherwise>
+                                                            Không có
+                                                        </c:otherwise>
                                                     </c:choose>
                                                 </td>
                                                 <td>
                                                     <a href="/admin/product/${product.id}"
-                                                        class="btn btn-success btn-sm">View</a>
+                                                        class="btn btn-success btn-sm">
+                                                        Xem
+                                                    </a>
+
                                                     <a href="/admin/product/update/${product.id}"
-                                                        class="btn btn-warning btn-sm mx-1">Update</a>
+                                                        class="btn btn-warning btn-sm mx-1">
+                                                        Cập nhật
+                                                    </a>
+
                                                     <a href="/admin/product/delete/${product.id}"
                                                         class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this product?');">
-                                                        Delete
+                                                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">
+                                                        Xóa
                                                     </a>
                                                 </td>
                                             </tr>
@@ -89,19 +102,25 @@
 
                                     <!-- PREVIOUS -->
                                     <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                        <a class="page-link" href="/admin/product?page=${currentPage - 1}">&laquo;</a>
+                                        <a class="page-link" href="/admin/product?page=${currentPage - 1}">
+                                            &laquo;
+                                        </a>
                                     </li>
 
                                     <!-- PAGE NUMBERS -->
                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                         <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                            <a class="page-link" href="/admin/product?page=${i}">${i}</a>
+                                            <a class="page-link" href="/admin/product?page=${i}">
+                                                ${i}
+                                            </a>
                                         </li>
                                     </c:forEach>
 
                                     <!-- NEXT -->
                                     <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                        <a class="page-link" href="/admin/product?page=${currentPage + 1}">&raquo;</a>
+                                        <a class="page-link" href="/admin/product?page=${currentPage + 1}">
+                                            &raquo;
+                                        </a>
                                     </li>
 
                                 </ul>

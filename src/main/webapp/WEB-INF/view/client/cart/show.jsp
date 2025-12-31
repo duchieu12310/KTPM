@@ -11,48 +11,39 @@
                     <title>Giỏ hàng - kinhmta</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                    <!-- Google Fonts -->
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                     <link
                         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
                         rel="stylesheet">
 
-                    <!-- Icon Fonts -->
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
                         rel="stylesheet">
 
-                    <!-- Libraries -->
-                    <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-                    <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-                    <!-- Bootstrap & Custom Styles -->
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
                     <link href="/client/css/style.css" rel="stylesheet">
                 </head>
 
                 <body>
-                    <!-- Spinner -->
-                    <div id="spinner"
-                        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
-                        <div class="spinner-grow text-primary" role="status"></div>
-                    </div>
 
                     <jsp:include page="../layout/header.jsp" />
 
                     <!-- Cart Page Start -->
                     <div class="container-fluid py-5">
                         <div class="container py-5">
-                            <!-- Breadcrumb -->
+
+                            <!-- ===== BREADCRUMB ===== -->
                             <nav aria-label="breadcrumb" class="mb-3">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Chi Tiết Giỏ Hàng</li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Chi Tiết Giỏ Hàng
+                                    </li>
                                 </ol>
                             </nav>
 
-                            <!-- Xóa toàn bộ giỏ hàng -->
+                            <!-- ===== XÓA TOÀN BỘ ===== -->
                             <c:if test="${not empty cartDetails}">
                                 <div class="mb-4 text-end">
                                     <form method="post" action="/delete-all"
@@ -65,7 +56,7 @@
                                 </div>
                             </c:if>
 
-                            <!-- Table -->
+                            <!-- ===== TABLE GIỎ HÀNG ===== -->
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -79,47 +70,57 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <c:if test="${empty cartDetails}">
                                             <tr>
-                                                <td colspan="6" class="text-center">Không có sản phẩm trong giỏ hàng
+                                                <td colspan="6" class="text-center">
+                                                    Không có sản phẩm trong giỏ hàng
                                                 </td>
                                             </tr>
                                         </c:if>
 
-                                        <c:forEach var="cartDetail" items="${cartDetails}" varStatus="status">
+                                        <c:forEach var="cartDetail" items="${cartDetails}">
                                             <tr>
                                                 <td>
                                                     <img src="/images/product/${cartDetail.product.image}"
-                                                        class="img-fluid rounded-circle"
-                                                        style="width: 80px; height: 80px;" alt="">
+                                                        class="img-fluid rounded-circle" style="width:80px;height:80px">
                                                 </td>
+
                                                 <td>
-                                                    <a href="/product/${cartDetail.product.id}"
-                                                        target="_blank">${cartDetail.product.name}</a>
+                                                    <a href="/product/${cartDetail.product.id}" target="_blank">
+                                                        ${cartDetail.product.name}
+                                                    </a>
                                                 </td>
-                                                <td>
-                                                    <fmt:formatNumber type="number" value="${cartDetail.price}" /> đ
+
+                                                <!-- ===== GIÁ GỐC ===== -->
+                                                <td class="item-price" data-price="${cartDetail.price}">
+                                                    <fmt:formatNumber value="${cartDetail.price}" /> đ
                                                 </td>
+
+                                                <!-- ===== SỐ LƯỢNG ===== -->
                                                 <td>
-                                                    <div class="input-group quantity" style="width: 100px;">
+                                                    <div class="input-group quantity" style="width:100px">
                                                         <button
-                                                            class="btn btn-sm btn-minus rounded-circle bg-light border"><i
-                                                                class="fa fa-minus"></i></button>
+                                                            class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
                                                         <input type="text"
                                                             class="form-control form-control-sm text-center border-0"
                                                             value="${cartDetail.quantity}"
-                                                            data-cart-detail-id="${cartDetail.id}"
-                                                            data-cart-detail-price="${cartDetail.price}"
-                                                            data-cart-detail-index="${status.index}">
+                                                            data-cart-detail-id="${cartDetail.id}">
                                                         <button
-                                                            class="btn btn-sm btn-plus rounded-circle bg-light border"><i
-                                                                class="fa fa-plus"></i></button>
+                                                            class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <fmt:formatNumber type="number"
+
+                                                <!-- ===== THÀNH TIỀN ===== -->
+                                                <td class="item-total">
+                                                    <fmt:formatNumber
                                                         value="${cartDetail.price * cartDetail.quantity}" /> đ
                                                 </td>
+
                                                 <td>
                                                     <form method="post" action="/delete-cart-product/${cartDetail.id}">
                                                         <input type="hidden" name="${_csrf.parameterName}"
@@ -131,56 +132,47 @@
                                                 </td>
                                             </tr>
                                         </c:forEach>
+
                                     </tbody>
                                 </table>
                             </div>
 
-                            <!-- Order Info & Checkout Form -->
+                            <!-- ===== THÔNG TIN ĐƠN HÀNG ===== -->
                             <div class="mt-5 row g-4 justify-content-start">
                                 <div class="col-12 col-md-8">
                                     <div class="bg-light rounded">
+
                                         <div class="p-4">
-                                            <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal">Đơn Hàng</span>
+                                            <h1 class="display-6 mb-4">
+                                                Thông Tin <span class="fw-normal">Đơn Hàng</span>
                                             </h1>
+
                                             <div class="d-flex justify-content-between mb-4">
                                                 <h5 class="mb-0">Tạm tính:</h5>
-                                                <p class="mb-0">
-                                                    <fmt:formatNumber type="number"
-                                                        value="${totalPrice != null ? totalPrice : 0}" /> đ
+                                                <p class="mb-0" id="subTotal">
+                                                    <fmt:formatNumber value="${totalPrice != null ? totalPrice : 0}" />
+                                                    đ
                                                 </p>
                                             </div>
+
                                             <div class="d-flex justify-content-between">
                                                 <h5 class="mb-0">Phí vận chuyển</h5>
                                                 <p class="mb-0">0 đ</p>
                                             </div>
                                         </div>
 
-                                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                                        <div class="py-4 mb-4 border-top border-bottom
+                                d-flex justify-content-between">
                                             <h5 class="mb-0 ps-4">Tổng số tiền</h5>
-                                            <p class="mb-0 pe-4">
-                                                <fmt:formatNumber type="number"
-                                                    value="${totalPrice != null ? totalPrice : 0}" /> đ
+                                            <p class="mb-0 pe-4" id="grandTotal">
+                                                <fmt:formatNumber value="${totalPrice != null ? totalPrice : 0}" /> đ
                                             </p>
                                         </div>
 
-                                        <!-- Form thanh toán luôn hiển thị -->
-                                        <form:form id="checkoutForm" action="/confirm-checkout" method="post"
-                                            modelAttribute="cart">
+                                        <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                            <c:if test="${not empty cart.cartDetails}">
-                                                <div style="display: none;">
-                                                    <c:forEach var="cartDetail" items="${cart.cartDetails}"
-                                                        varStatus="status">
-                                                        <form:input path="cartDetails[${status.index}].id"
-                                                            value="${cartDetail.id}" />
-                                                        <form:input path="cartDetails[${status.index}].quantity"
-                                                            value="${cartDetail.quantity}" />
-                                                    </c:forEach>
-                                                </div>
-                                            </c:if>
-                                            <button type="submit"
-                                                class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                                onclick="return checkCartNotEmpty();">
+                                            <button type="submit" class="btn border-secondary rounded-pill
+                                       px-4 py-3 text-primary ms-4 mb-4" onclick="return checkCartNotEmpty();">
                                                 Xác nhận thanh toán
                                             </button>
                                         </form:form>
@@ -195,31 +187,59 @@
 
                     <jsp:include page="../layout/footer.jsp" />
 
-                    <!-- Back to Top -->
-                    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-                            class="fa fa-arrow-up"></i></a>
-
-                    <!-- JS Libraries -->
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-                    <script src="/client/lib/easing/easing.min.js"></script>
-                    <script src="/client/lib/waypoints/waypoints.min.js"></script>
-                    <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
-                    <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
-
-                    <!-- Custom JS -->
-                    <script src="/client/js/main.js"></script>
-
-                    <!-- JS kiểm tra giỏ hàng trước khi thanh toán -->
+                    <!-- ===== JS ===== -->
                     <script>
+                        function formatMoney(number) {
+                            return number.toLocaleString('vi-VN') + " đ";
+                        }
+
+                        function updateTotals() {
+                            let total = 0;
+
+                            document.querySelectorAll("tbody tr").forEach(row => {
+                                const qtyInput = row.querySelector("input[data-cart-detail-id]");
+                                const priceCell = row.querySelector(".item-price");
+                                const totalCell = row.querySelector(".item-total");
+
+                                if (!qtyInput || !priceCell || !totalCell) return;
+
+                                const quantity = parseInt(qtyInput.value);
+                                const price = parseFloat(priceCell.dataset.price);
+
+                                const itemTotal = quantity * price;
+                                totalCell.innerText = formatMoney(itemTotal);
+                                total += itemTotal;
+                            });
+
+                            document.getElementById("subTotal").innerText = formatMoney(total);
+                            document.getElementById("grandTotal").innerText = formatMoney(total);
+                        }
+
+                        document.addEventListener("DOMContentLoaded", function () {
+
+                            document.querySelectorAll(".btn-plus").forEach(btn => {
+                                btn.onclick = function () {
+                                    const input = this.closest(".quantity").querySelector("input");
+                                    input.value = parseInt(input.value) + 1;
+                                    updateTotals();
+                                }
+                            });
+
+                            document.querySelectorAll(".btn-minus").forEach(btn => {
+                                btn.onclick = function () {
+                                    const input = this.closest(".quantity").querySelector("input");
+                                    let v = parseInt(input.value);
+                                    if (v > 1) {
+                                        input.value = v - 1;
+                                        updateTotals();
+                                    }
+                                }
+                            });
+
+                        });
+
                         function checkCartNotEmpty() {
-                            // Kiểm tra nếu có dòng "Không có sản phẩm"
-                            var emptyRow = document.querySelector("table tbody tr td[colspan='6']");
-                            if (emptyRow) {
-                                alert("Không thể thanh toán khi không có mặt hàng nào trong giỏ hàng!");
-                                return false; // Ngăn form submit
-                            }
-                            return true; // Cho phép submit form
+                            return document.querySelectorAll("tbody tr td[colspan='6']").length === 0;
                         }
                     </script>
 
