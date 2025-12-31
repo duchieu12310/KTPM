@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import vn.nhom13.ktpm.domain.Cart;
 import vn.nhom13.ktpm.domain.CartDetail;
 import vn.nhom13.ktpm.domain.Product;
 import vn.nhom13.ktpm.domain.Product_;
 import vn.nhom13.ktpm.domain.User;
+import vn.nhom13.ktpm.domain.dto.OrderDTO;
 import vn.nhom13.ktpm.domain.dto.ProductCriteriaDTO;
 import vn.nhom13.ktpm.service.ProductService;
 
@@ -104,6 +107,7 @@ public class ItemController {
 
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("order", new OrderDTO()); // thêm để form binding
 
         return "client/cart/checkout";
     }
@@ -118,15 +122,37 @@ public class ItemController {
     @PostMapping("/place-order")
     public String handlePlaceOrder(
             HttpServletRequest request,
-            @RequestParam("receiverName") String receiverName,
-            @RequestParam("receiverAddress") String receiverAddress,
-            @RequestParam("receiverPhone") String receiverPhone) {
-        User currentUser = new User();// null
+            @Valid @ModelAttribute("order") OrderDTO orderDTO,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            // Nếu có lỗi validate, lấy cart để hiển thị lại form
+            HttpSession session = request.getSession(false);
+            User currentUser = new User();
+            long id = (long) session.getAttribute("id");
+            currentUser.setId(id);
+
+            Cart cart = this.productService.fetchByUser(currentUser);
+            List<CartDetail> cartDetails = cart == null ? new ArrayList<>() : cart.getCartDetails();
+            double totalPrice = cartDetails.stream().mapToDouble(cd -> cd.getPrice() * cd.getQuantity()).sum();
+
+            model.addAttribute("cartDetails", cartDetails);
+            model.addAttribute("totalPrice", totalPrice);
+
+            return "client/cart/checkout"; // trả lại form với thông báo lỗi
+        }
+
+        // Xử lý đặt hàng nếu hợp lệ
         HttpSession session = request.getSession(false);
+        User currentUser = new User();
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
-        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+        this.productService.handlePlaceOrder(currentUser, session,
+                orderDTO.getReceiverName(),
+                orderDTO.getReceiverAddress(),
+                orderDTO.getReceiverPhone());
 
         return "redirect:/thanks";
     }

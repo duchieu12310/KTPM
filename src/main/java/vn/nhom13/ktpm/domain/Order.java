@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "orders")
@@ -34,12 +37,18 @@ public class Order implements Serializable {
     private String note;
 
     // ================== RECEIVER INFO ==================
+    @NotBlank(message = "Họ và Tên không được để trống")
+    @Size(min = 3, message = "Họ và tên phải có tối thiểu 3 ký tự")
     @Column(name = "receiver_name")
     private String receiverName;
 
+    @NotBlank(message = "Địa chỉ không được để trống")
+    @Size(min = 5, message = "Địa chỉ phải có ít nhất 5 ký tự")
     @Column(name = "receiver_address")
     private String receiverAddress;
 
+    @NotBlank(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải bắt đầu bằng 0 và gồm đúng 10 chữ số")
     @Column(name = "receiver_phone")
     private String receiverPhone;
 

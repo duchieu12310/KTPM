@@ -54,9 +54,14 @@
                                                         <form:errors path="address" cssClass="invalid-feedback" />
                                                     </c:set>
                                                     <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                                    </c:set>
+
+                                                    <c:set var="errorConfirmPassword">
                                                         <form:errors path="confirmPassword"
                                                             cssClass="invalid-feedback" />
                                                     </c:set>
+
 
                                                     <!-- ===== HỌ TÊN ===== -->
                                                     <div class="row mb-3">
@@ -81,7 +86,7 @@
 
                                                     <!-- ===== EMAIL ===== -->
                                                     <div class="form-floating mb-3">
-                                                        <form:input path="email" type="email" placeholder="Email"
+                                                        <form:input path="email" type="text" placeholder="Email"
                                                             class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" />
                                                         <label>Địa chỉ email</label>
                                                         ${errorEmail}
@@ -205,24 +210,26 @@
                                                     <!-- ===== MẬT KHẨU ===== -->
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
+                                                            <div class="form-floating">
                                                                 <form:input path="password" type="password"
-                                                                    placeholder="Mật khẩu"
-                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" />
+                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                                                    placeholder="Mật khẩu" />
                                                                 <label>Mật khẩu</label>
+                                                                ${errorPassword}
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
+                                                            <div class="form-floating">
                                                                 <form:input path="confirmPassword" type="password"
-                                                                    placeholder="Nhập lại mật khẩu"
-                                                                    class="form-control" />
+                                                                    class="form-control ${not empty errorConfirmPassword ? 'is-invalid' : ''}"
+                                                                    placeholder="Xác nhận mật khẩu" />
                                                                 <label>Xác nhận mật khẩu</label>
-                                                                ${errorPassword}
+                                                                ${errorConfirmPassword}
                                                             </div>
                                                         </div>
                                                     </div>
+
 
                                                     <!-- ===== BUTTON ===== -->
                                                     <div class="mt-4 mb-0">

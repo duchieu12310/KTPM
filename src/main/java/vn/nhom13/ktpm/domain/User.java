@@ -29,11 +29,14 @@ public class User implements Serializable {
     @Column(name = "full_name")
     private String fullName;
 
+    // Địa chỉ bắt buộc
+    @NotNull(message = "Địa chỉ không được để trống")
+    @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
 
-    // Số điện thoại VN
-    @NotNull
-    @Pattern(regexp = "^(0[3|5|7|8|9])[0-9]{8}$", message = "Số điện thoại không hợp lệ")
+    // Số điện thoại: bắt đầu bằng 0, đúng 10 số, chỉ gồm số
+    @NotNull(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải bắt đầu bằng 0 và gồm đúng 10 chữ số")
     private String phone;
 
     private String avatar;
@@ -43,10 +46,10 @@ public class User implements Serializable {
     @Pattern(regexp = "NAM|NU|KHAC", message = "Giới tính phải là NAM, NU hoặc KHAC")
     private String gender;
 
-    // Năm sinh
+    // Năm sinh từ 1924 đến 2024
     @NotNull(message = "Năm sinh không được để trống")
-    @Min(value = 1900, message = "Năm sinh không hợp lệ")
-    @Max(value = 2100, message = "Năm sinh không hợp lệ")
+    @Min(value = 1924, message = "Năm sinh phải từ 1924 trở lên")
+    @Max(value = 2024, message = "Năm sinh không được lớn hơn 2024")
     @Column(name = "birth_year")
     private Integer birthYear;
 

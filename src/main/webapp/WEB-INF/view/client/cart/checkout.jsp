@@ -4,11 +4,11 @@
             <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
                 <!DOCTYPE html>
-                <html lang="en">
+                <html lang="vi">
 
                 <head>
                     <meta charset="utf-8">
-                    <title>Thanh toán - ktpm</title>
+                    <title>Thanh toán - KTPM</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
                     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +79,7 @@
                             </div>
 
                             <!-- ====== FORM ĐẶT HÀNG ====== -->
-                            <form action="/place-order" method="post">
+                            <form:form action="/place-order" method="post" modelAttribute="order">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                 <input type="hidden" name="paymentMethod" value="COD">
                                 <input type="hidden" name="totalPrice" value="${totalPrice}">
@@ -91,23 +91,26 @@
 
                                         <div class="mb-3">
                                             <label>Tên người nhận</label>
-                                            <input class="form-control" name="receiverName" required>
+                                            <form:input path="receiverName" cssClass="form-control" />
+                                            <form:errors path="receiverName" cssClass="text-danger" />
                                         </div>
 
                                         <div class="mb-3">
                                             <label>Địa chỉ nhận hàng</label>
-                                            <input class="form-control" name="receiverAddress" required>
+                                            <form:input path="receiverAddress" cssClass="form-control" />
+                                            <form:errors path="receiverAddress" cssClass="text-danger" />
                                         </div>
 
                                         <div class="mb-3">
                                             <label>Số điện thoại</label>
-                                            <input class="form-control" name="receiverPhone" required>
+                                            <form:input path="receiverPhone" cssClass="form-control" />
+                                            <form:errors path="receiverPhone" cssClass="text-danger" />
                                         </div>
 
                                         <div class="mb-3">
                                             <label>Ghi chú</label>
-                                            <textarea class="form-control" name="note" rows="3"
-                                                placeholder="Giao giờ hành chính, gọi trước khi giao..."></textarea>
+                                            <form:textarea path="note" cssClass="form-control" rows="3"
+                                                placeholder="Giao giờ hành chính, gọi trước khi giao..." />
                                         </div>
                                     </div>
 
@@ -141,7 +144,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form:form>
 
                         </div>
                     </div>

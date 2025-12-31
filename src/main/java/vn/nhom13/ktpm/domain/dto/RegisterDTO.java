@@ -3,32 +3,39 @@ package vn.nhom13.ktpm.domain.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import vn.nhom13.ktpm.service.validator.RegisterChecked;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import vn.nhom13.ktpm.service.validator.RegisterChecked;
 
 @RegisterChecked
 public class RegisterDTO {
 
-    @NotBlank(message = "First name không được để trống")
-    @Size(min = 3, message = "First name phải có tối thiểu 3 ký tự")
+    @NotBlank(message = "Họ và Tên không được để trống")
+    @Size(min = 3, message = "Họ và tên phải có tối thiểu 3 ký tự")
     private String firstName;
 
+    // Không bắt buộc
     private String lastName;
 
     @NotBlank(message = "Email không được để trống")
-    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @Email(message = "Email không hợp lệ")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email phải có định dạng ví dụ: abc@gmail.com")
     private String email;
 
     @NotBlank(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải bắt đầu bằng 0 và gồm đúng 10 chữ số")
     private String phone;
 
     // NAM | NU | KHAC
     @NotBlank(message = "Vui lòng chọn giới tính")
+    @Pattern(regexp = "NAM|NU|KHAC", message = "Giới tính phải là NAM, NU hoặc KHAC")
     private String gender;
 
     @NotNull(message = "Năm sinh không được để trống")
-    @Min(value = 1900, message = "Năm sinh không hợp lệ")
+    @Min(value = 1924, message = "Năm sinh phải từ 1924 trở lên")
+    @Max(value = 2024, message = "Năm sinh không được lớn hơn 2024")
     private Integer birthYear;
 
     @NotBlank(message = "Địa chỉ không được để trống")
